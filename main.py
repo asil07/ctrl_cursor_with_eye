@@ -31,6 +31,19 @@ while True:
                 screen_x = int(landmark.x * screen_w)
                 screen_y = int(landmark.y * screen_h)
                 pyautogui.moveTo(screen_x, screen_y)
+        left = [landmarks[145], landmarks[159]]
+        for landmark in left:
+            x = int(landmark.x * frame_w)
+            y = int(landmark.y * frame_h)
+
+            cv2.circle(frame, (x, y), 3, (0, 0, 255))
+
+        # to detect winks we need difference of two landmarks below
+        if (left[0].y - left[1].y) < 0.01:
+            pyautogui.click()
+            print("click")
+            pyautogui.sleep(1)
+
 
     cv2.imshow("EYe controller", frame)
 
